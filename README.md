@@ -25,10 +25,20 @@ optional arguments:
   -N, --nofuture        Don't print any events that haven't happened yet.
 ```
 
+The different choices available for `-t` are explained below:
+    none       - Do not print an event count. This is the default behavior.
+    simple     - Print one number that denotes the total number of events printed by the program.
+    categories - Print two numbers: one for the number of past events printed and another for future ones.
+    both       - Use both the 'simple' and 'categories' options.
+
 Here are some examples:
+* `python days_until.py` will print all events in `eventlist.txt`.
+* `python days_until.py -` will take standard input and print all events found.
+* `python days_until.py file1 file2` will print all events in both `file1` and `file2`.
 * `python days_until.py -nd 30` will print all events that are going to happen within 30 days.
 * `python days_until.py -Nr` will print all past events from most to least recent.
-* `python days_until.py -d 100 -D 100` will print all events that happened within 100 days from today.
+* `python days_until.py -Nd 365` will print all events that happened at least a year ago.
+* `python days_until.py -n -d 7 -D 14` will print all events that are going to happen next week.
 
 ### Installation
 On Unix-like systems, a `Makefile` is provided to "install" this program in your $PATH, by default at `/usr/local/bin/`. After installation, you can invoke this program by running `daysuntil` in your shell of choice.
@@ -38,12 +48,14 @@ To do so, in the top-level directory of this repo, invoke `make install`. Be sur
 ### Event List File Format
 All entries in the input file must be in the exact form `[3-Month] [2-Day] [4-Year] [Event name or description].` As an example, the following would be an appropriately-formatted event: `Jan 01 2000 Y2K happens`.
 
-### Troubleshooting
 The entries must be *exactly* in the specified format, and even minor deviations will not be recognized by the program. For example, the following, while similar, are invalid:
 `January 01 2000 Y2K`
 `Jan 1 2000 Y2K`
 `Jan 01 00 Y2K`
 `01 01 2000 Y2K`
 
-Events that occurred before 1 AD or after 9999 AD will not be accepted.
+
+### Known Issues
+* Events that occurred before 1 AD or after 9999 AD will not be accepted.
+* The program does not accept passsing `--` as a flag to specify the end of command-line arguments.
 
