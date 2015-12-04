@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-from __future__ import with_statement
+from __future__ import print_function, with_statement
 from datetime import datetime
 import argparse, math, re, os, sys
 
@@ -23,7 +23,7 @@ def get_events(fns):
                 with open(fn, 'r') as fh:
                     parse_file(fh, past, future)
         except StandardError as err:
-            print(err)
+            print(err, file=sys.stderr)
             exit(1)
 
     past.sort()
@@ -58,11 +58,15 @@ def parse_file(fh, past, future):
         line = fh.readline()
     return past, future
 
+def in_range(args, event):
+    return (not args.delta or event[0] <= args.delta) and \
+           event[0] >= args.reverse_delta
+
 def print_past_events(args, past, width):
     if not args.nopast:
         form = "%%%dd day%%c since %%s" % width
         for event in past:
-            if not args.delta or event[0] <= args.delta:
+            if in_range(args, event):
                 fargs = (event[0], ' ' if event[0] == 1 else 's', event[1])
                 print(form % fargs)
 
@@ -70,7 +74,7 @@ def print_future_events(args, future, width):
     if not args.nofuture:
         form = "%%%dd day%%c until %%s" % width
         for event in future:
-            if not args.delta or event[0] <= args.delta:
+            if in_range(args, event):
                 fargs = (event[0], ' ' if event[0] == 1 else 's', event[1])
                 print(form % fargs)
 
@@ -78,6 +82,7 @@ if __name__ == "__main__":
     # Parse options with argparse
     argparser = argparse.ArgumentParser(description="List events by days since/until they happen(ed).")
     argparser.add_argument("-d", "--delta", type=int, default=0, help="Only print events whose days since/until is less than this argument. (0 for no limits)")
+    argparser.add_argument("-D", "--reverse-delta", type=int, default=0, help="Only print events whose days since/until is greater than or equal to this argument. (default is 0)")
     argparser.add_argument("-r", "--reverse", action="store_true", help="Print the events in reverse order.")
     argparser.add_argument("-n", "--nopast", action="store_true", help="Don't print any events that have already happened.")
     argparser.add_argument("-N", "--nofuture", action="store_true", help="Don't print any events that haven't happened yet.")
@@ -85,7 +90,11 @@ if __name__ == "__main__":
     args = argparser.parse_args()
 
     if args.delta < 0:
-        print("Delta must be a positive integer.")
+        print("The delta must be a positive integer.", file=sys.stderr)
+        exit(1)
+
+    if args.reverse_delta < 0:
+        print("The reverse delta must be a positive integer.", file=sys.stderr)
         exit(1)
 
     # Fetch event data

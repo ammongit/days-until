@@ -14,16 +14,21 @@ positional arguments:
 
 optional arguments:
   -h, --help            Show this help message and exit
-  -d, --delta DELTA     Only print events whose days since/until is less than
+  -d, --delta DELTA
+                        Only print events whose days since/until is less than
                         this argument. (0 for no limits)
+  -D, --reverse-delta REVERSE_DELTA
+                        Only print events whose days since/until is greater
+                        than or equal to this argument. (default is 0)
   -r, --reverse         Print the events in reverse order.
   -n, --nopast          Don't print any events that have already happened.
   -N, --nofuture        Don't print any events that haven't happened yet.
 ```
 
 Here are some examples:
-`python days_until.py -nd 30` will print all events that are going to happen within 30 days.
-`python days_until.py -Nr` will print all past events from most to least recent.
+* `python days_until.py -nd 30` will print all events that are going to happen within 30 days.
+* `python days_until.py -Nr` will print all past events from most to least recent.
+* `python days_until.py -d 100 -D 100` will print all events that happened within 100 days from today.
 
 ### Installation
 On Unix-like systems, a `Makefile` is provided to "install" this program in your $PATH, by default at `/usr/local/bin/`. After installation, you can invoke this program by running `daysuntil` in your shell of choice.
