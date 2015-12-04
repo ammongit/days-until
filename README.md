@@ -5,12 +5,12 @@ This program reads a file (by default `eventlist.txt`) and lists all events in t
 
 ### Usage
 ```
-days_until.py [-h] [-d DELTA] [-r] [-n] [-N] [input-file [input-file ...]]
+python days_until.py [-h] [-d DELTA] [-r] [-n] [-N] [input-file [input-file ...]]
 
 List events by days since/until they happen(ed).
 
 positional arguments:
-  input-file            Specify a input file. If none are specified, then `eventlist.txt` is used.
+  input-file            Specify a input file. If none are specified, then "eventlist.txt" is used.
 
 optional arguments:
   -h, --help            Show this help message and exit
@@ -21,8 +21,17 @@ optional arguments:
   -N, --nofuture        Don't print any events that haven't happened yet.
 ```
 
+Here are some examples:
+`python days_until.py -nd 30` will print all events that are going to happen within 30 days.
+`python days_until.py -Nr` will print all past events from most to least recent.
+
+### Installation
+On Unix-like systems, a `Makefile` is provided to "install" this program in your $PATH, by default at `/usr/local/bin/`. After installation, you can invoke this program by running `daysuntil` in your shell of choice.
+
+To do so, in the top-level directory of this repo, invoke `make install`. Be sure you sufficient privileges to install the file.
+
 ### Event List File Format
-All entries in the input file must be in the exact form `[3-Month] [2-Day] [4-Year] [Event name of description].` As an example, the following would be an appropriately-formatted event: `Jan 01 2000 Y2K happens`.
+All entries in the input file must be in the exact form `[3-Month] [2-Day] [4-Year] [Event name or description].` As an example, the following would be an appropriately-formatted event: `Jan 01 2000 Y2K happens`.
 
 ### Troubleshooting
 The entries must be *exactly* in the specified format, and even minor deviations will not be recognized by the program. For example, the following, while similar, are invalid:
