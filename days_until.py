@@ -6,16 +6,25 @@ import argparse, math, re, os, sys
 DEFAULT_EVENT_FILE = os.path.dirname(sys.argv[0]) + os.sep + "eventlist.txt"
 EVENT_FORMAT_RE = re.compile("([A-Z][a-z]{2} [0-9]{2} [0-9]{4}) (.*)\n")
 
-def get_events(fn):
-    try:
-        if fn == "-": # Read from stdin
-            past, future = parse_file(sys.stdin)
-        else:
-            with open(fn, 'r') as fh:
-                past, future = parse_file(fh)
-    except StandardError as err:
-        print(err)
-        exit(1)
+def get_events(fns):
+    if not fns:
+        fns = {DEFAULT_EVENT_FILE}
+    else:
+        fns = set(fns)
+
+    past = []
+    future = []
+
+    for fn in fns:
+        try:
+            if fn == "-": # Read from stdin
+                parse_file(sys.stdin, past, future)
+            else:
+                with open(fn, 'r') as fh:
+                    parse_file(fh, past, future)
+        except StandardError as err:
+            print(err)
+            exit(1)
 
     past.sort()
     future.sort()
@@ -34,9 +43,7 @@ def get_events(fn):
         width = math.ceil(math.log10(max(past[-1][0], future[-1][0])))
     return past[::-1], future, width # [::-1] reverses the collection
 
-def parse_file(fh):
-    past = []
-    future = []
+def parse_file(fh, past, future):
     line = fh.readline()
     while line:
         match = EVENT_FORMAT_RE.match(line)
@@ -74,7 +81,7 @@ if __name__ == "__main__":
     argparser.add_argument("-r", "--reverse", action="store_true", help="Print the events in reverse order.")
     argparser.add_argument("-n", "--nopast", action="store_true", help="Don't print any events that have already happened.")
     argparser.add_argument("-N", "--nofuture", action="store_true", help="Don't print any events that haven't happened yet.")
-    argparser.add_argument("input-file", nargs='?', default=DEFAULT_EVENT_FILE, help="Specify a different input other than \"eventlist.txt\".")
+    argparser.add_argument("input-file", nargs='*', help="Specify a different input other than \"eventlist.txt\".")
     args = argparser.parse_args()
 
     if args.delta < 0:
