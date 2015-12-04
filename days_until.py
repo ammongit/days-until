@@ -81,7 +81,7 @@ if __name__ == "__main__":
     argparser.add_argument("-r", "--reverse", action="store_true", help="Print the events in reverse order.")
     argparser.add_argument("-n", "--nopast", action="store_true", help="Don't print any events that have already happened.")
     argparser.add_argument("-N", "--nofuture", action="store_true", help="Don't print any events that haven't happened yet.")
-    argparser.add_argument("input-file", nargs='*', help="Specify a different input other than \"eventlist.txt\".")
+    argparser.add_argument("input-file", nargs='*', help="Specify a input file. If none are specified, then eventlist.txt is used.")
     args = argparser.parse_args()
 
     if args.delta < 0:
