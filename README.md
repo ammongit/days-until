@@ -10,19 +10,26 @@ python days_until.py [-h] [-d DELTA] [-r] [-n] [-N] [input-file [input-file ...]
 List events by days since/until they happen(ed).
 
 positional arguments:
-  input-file            Specify a input file. If none are specified, then "eventlist.txt" is used.
+  input-file            Specify a input file. If none are specified, then
+                        eventlist.txt is used.
 
 optional arguments:
-  -h, --help            Show this help message and exit
-  -d, --delta DELTA
+  -h, --help            show this help message and exit
+  -d DELTA, --delta DELTA
                         Only print events whose days since/until is less than
                         this argument. (0 for no limits)
-  -D, --reverse-delta REVERSE_DELTA
+  -D RDELTA, --reverse-delta RDELTA
                         Only print events whose days since/until is greater
                         than or equal to this argument. (default is 0)
   -r, --reverse         Print the events in reverse order.
   -n, --nopast          Don't print any events that have already happened.
   -N, --nofuture        Don't print any events that haven't happened yet.
+  -t, --totals-style [{none,simple,categories,both}]
+                        Specify how you want days_until.py to print event
+                        totals. (default is 'none')
+  -T, --totals-only     Print only the event totals; do not print any events.
+  -A, --total-all       When displaying totals, print them for all events in all
+                        files, not just the ones that were printed.
 ```
 
 The different choices available for `-t` are explained below:

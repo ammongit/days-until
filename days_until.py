@@ -108,9 +108,9 @@ if __name__ == "__main__":
     argparser.add_argument("-r", "--reverse", action="store_true", help="Print the events in reverse order.")
     argparser.add_argument("-n", "--nopast", action="store_true", help="Don't print any events that have already happened.")
     argparser.add_argument("-N", "--nofuture", action="store_true", help="Don't print any events that haven't happened yet.")
-    argparser.add_argument("-t", "--totals-style", nargs='?', choices=("none", "simple", "categories", "both"), default="none", dest="tstyle", help="Specify how you want %(prog)s to print event totals.")
+    argparser.add_argument("-t", "--totals-style", nargs='?', choices=("none", "simple", "categories", "both"), default="none", dest="tstyle", help="Specify how you want %(prog)s to print event totals. (default is 'none')")
     argparser.add_argument("-T", "--totals-only", action="store_false", dest="print_events", help="Print only the event totals; do not print any events.")
-    argparser.add_argument("-A", "--total-all", action="store_true", dest="total_all", help="When printing totals, print them for all events in all files, not just the ones that were printed.")
+    argparser.add_argument("-A", "--total-all", action="store_true", dest="total_all", help="When displaying totals, print them for all events in all files, not just the ones that were printed.")
     argparser.add_argument("input-file", nargs='*', help="Specify a input file. If none are specified, then eventlist.txt is used.")
     args = argparser.parse_args()
 
