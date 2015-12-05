@@ -33,10 +33,10 @@ optional arguments:
 ```
 
 The different choices available for `-t` are explained below:
-    none       - Do not print an event count. This is the default behavior.
-    simple     - Print one number that denotes the total number of events printed by the program.
-    categories - Print two numbers: one for the number of past events printed and another for future ones.
-    both       - Use both the 'simple' and 'categories' options.
+  * none       - Do not print an event count. This is the default behavior.
+  * simple     - Print one number that denotes the total number of events printed by the program.
+  * categories - Print two numbers: one for the number of past events printed and another for future ones.
+  * both       - Use both the 'simple' and 'categories' options.
 
 Here are some examples:
 * `python days_until.py` will print all events in `eventlist.txt`.
