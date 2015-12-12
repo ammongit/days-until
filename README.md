@@ -48,7 +48,7 @@ Here are some examples:
 * `python days_until.py -n -d 7 -D 14` will print all events that are going to happen next week.
 
 ### Installation
-On Unix-like systems, a `Makefile` is provided to "install" this program in your $PATH, by default at `/usr/local/bin/`. After installation, you can invoke this program by running `daysuntil` in your shell of choice.
+On Unix-like systems, a `Makefile` is provided to "install" this program in your `$PATH`, by default at `/usr/local/bin/`. After installation, you can invoke this program by running `daysuntil` in your shell of choice.
 
 To do so, in the top-level directory of this repo, invoke `make install`. Be sure you sufficient privileges to install the file.
 
@@ -61,6 +61,10 @@ The entries must be *exactly* in the specified format, and even minor deviations
 `Jan 01 00 Y2K`
 `01 01 2000 Y2K`
 
+You may also specify recurring events like Christmas by replacing the 'year' field with dashes. For example, `Dec 25 ---- Christmas Day`. Like noted above, the format is very strict, so the year field must contain exactly four dashes.
+
+_Why is the format so unforgiving?_
+Because I'm using `datetime.strptime`, which takes formatted time in a certain format. Also, this way it looks nicer if you edit your `eventlist.txt` with monospaced editor.
 
 ### Known Issues
 * Events that occurred before 1 AD or after 9999 AD will not be accepted.

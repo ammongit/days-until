@@ -10,3 +10,6 @@ Dec 21 2012 End of the Mayan Calendar
 Oct 21 2015 Marty McFly arrives in the future
 Jan 19 2038 32-bit clocks roll over
 Jul 28 2061 Next periapsis of Halley's Comet
+
+Feb 14 ---- Valentine's Day
+Dec 25 ---- Christmas
