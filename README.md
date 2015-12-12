@@ -5,7 +5,7 @@ This program reads a file (by default `eventlist.txt`) and lists all events in t
 
 ### Usage
 ```
-python days_until.py [-h] [-d DELTA] [-r] [-n] [-N] [input-file [input-file ...]]
+python days_until.py [-h] [-d DELTA] [-D RDELTA] [-r] [-n] [-N] [input-file [input-file ...]]
 
 List events by days since/until they happen(ed).
 
