@@ -4,7 +4,7 @@ from datetime import datetime
 import argparse, math, re, os, sys
 
 DEFAULT_EVENT_FILE = os.path.dirname(sys.argv[0]) + os.sep + "eventlist.txt"
-EVENT_FORMAT_RE = re.compile("([A-Z][a-z]{2} [0-9]{2} [0-9]{4}) (.*)\n")
+EVENT_FORMAT_RE = re.compile("([A-Z][a-z]{2} [0-9]{2} (?:[0-9]{4}|----)) (.*)\n")
 
 def get_events(fns):
     if not fns:
@@ -44,13 +44,25 @@ def get_events(fns):
     return past[::-1], future, width # [::-1] reverses the collection
 
 def parse_file(fh, past, future):
+    today = datetime.today()
     line = fh.readline()
     while line:
         match = EVENT_FORMAT_RE.match(line)
         if match:
-            date = datetime.strptime(match.group(1), "%b %d %Y")
+            if match.group(1).endswith("----"):
+                # Recurring events like birthdays
+                date = datetime.strptime(match.group(1), "%b %d ----")
+                # Check if the event has already happened this year, if so, refer to next year's event.
+                if (today.month > date.month) or (today.month == date.month and today.day > date.day):
+                    date = datetime.strptime(match.group(1).replace("----", str(today.year + 1)), "%b %d %Y")
+                else:
+                    date = datetime.strptime(match.group(1).replace("----", str(today.year)), "%b %d %Y")
+            else: 
+                # One time events like wars
+                date = datetime.strptime(match.group(1), "%b %d %Y")
+
             name = match.group(2)
-            delta = (datetime.today() - date).days
+            delta = (today - date).days
             if delta >= 0:
                 past.append((delta, name))
             else:
