@@ -1,11 +1,11 @@
 # days-until
 A CLI program to give you the number of days until or since certain events.
 
-This program reads a file (by default `eventlist.txt`) and lists all events in the file by the number of days until (or since) the specified the event. The order of entries in the file does not matter, as the program will internally order all events by when they occurred/will occur.
+This program reads one or more files and lists all events in the file by the number of days until (or since) the specified the event. The order of entries in the file does not matter, as the program will internally order all events by when they occurred/will occur.
 
 ### Usage
 ```
-python days_until.py [-h] [-d DELTA] [-r] [-n] [-N] [input-file [input-file ...]]
+python days_until.py [-h] [-d DELTA] [-r] [-n] [-N] input-file [input-file ...]
 
 List events by days since/until they happen(ed).
 

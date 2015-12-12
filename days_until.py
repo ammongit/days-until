@@ -3,14 +3,10 @@ from __future__ import print_function, with_statement
 from datetime import datetime
 import argparse, math, re, os, sys
 
-DEFAULT_EVENT_FILE = os.path.dirname(sys.argv[0]) + os.sep + "eventlist.txt"
 EVENT_FORMAT_RE = re.compile("([A-Z][a-z]{2} [0-9]{2} (?:[0-9]{4}|----)) (.*)\n")
 
 def get_events(fns):
-    if not fns:
-        fns = {DEFAULT_EVENT_FILE}
-    else:
-        fns = set(fns)
+    fns = set(fns)
 
     past = []
     future = []
@@ -25,7 +21,6 @@ def get_events(fns):
         except StandardError as err:
             print(err, file=sys.stderr)
             exit(1)
-
     past.sort()
     future.sort()
 
@@ -123,7 +118,7 @@ if __name__ == "__main__":
     argparser.add_argument("-t", "--totals-style", nargs='?', choices=("none", "simple", "categories", "both"), default="none", dest="tstyle", help="Specify how you want %(prog)s to print event totals. (default is 'none')")
     argparser.add_argument("-T", "--totals-only", action="store_false", dest="print_events", help="Print only the event totals; do not print any events.")
     argparser.add_argument("-A", "--total-all", action="store_true", dest="total_all", help="When displaying totals, print them for all events in all files, not just the ones that were printed.")
-    argparser.add_argument("input-file", nargs='*', help="Specify a input file. If none are specified, then eventlist.txt is used.")
+    argparser.add_argument("input-file", nargs='+', help="Specify a input file. If none are specified, then eventlist.txt is used.")
     args = argparser.parse_args()
 
     # Perform sanity checks on arguments
