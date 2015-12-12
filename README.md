@@ -5,7 +5,7 @@ This program reads one or more files and lists all events in the file by the num
 
 ### Usage
 ```
-python days_until.py [-h] [-d DELTA] [-r] [-n] [-N] input-file [input-file ...]
+python days_until.py [-h] [-d DELTA] [-D RDELTA] [-r] [-n] [-N] input-file [input-file ...]
 
 List events by days since/until they happen(ed).
 
@@ -56,15 +56,18 @@ To do so, in the top-level directory of this repo, invoke `make install`. Be sur
 All entries in the input file must be in the exact form `[3-Month] [2-Day] [4-Year] [Event name or description].` As an example, the following would be an appropriately-formatted event: `Jan 01 2000 Y2K happens`.
 
 The entries must be *exactly* in the specified format, and even minor deviations will not be recognized by the program. For example, the following, while similar, are invalid:
-`January 01 2000 Y2K`
-`Jan 1 2000 Y2K`
-`Jan 01 00 Y2K`
-`01 01 2000 Y2K`
+* `January 01 2000 Y2K`
+* `Jan 1 2000 Y2K`
+* `Jan 01 00 Y2K`
+* `01 01 2000 Y2K`
 
-You may also specify recurring events like Christmas by replacing the 'year' field with dashes. For example, `Dec 25 ---- Christmas Day`. Like noted above, the format is very strict, so the year field must contain exactly four dashes.
+You may also specify recurring events like Christmas by replacing the 'year' field with dashes. For example:
+* `Dec 25 ---- Christmas Day`
+* `Feb 14 ---- Valentine's Day`
+<br> Like noted above, the format is very strict, so the year field must contain exactly four dashes.
 
-_Why is the format so unforgiving?_
-Because I'm using `datetime.strptime`, which takes formatted time in a certain format. Also, this way it looks nicer if you edit your `eventlist.txt` with monospaced editor.
+*Why is the format so unforgiving?* <br>
+Because I'm using `datetime.strptime`, which takes formatted time in a certain format. Also, this way it looks nicer if you view your `eventlist.txt` with a monospaced font.
 
 ### Known Issues
 * Events that occurred before 1 AD or after 9999 AD will not be accepted.
