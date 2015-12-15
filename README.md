@@ -39,7 +39,6 @@ The different choices available for `-t` are explained below:
   * both       - Use both the 'simple' and 'categories' options.
 
 Here are some examples:
-* `python days_until.py` will print all events in `eventlist.txt`.
 * `python days_until.py -` will take standard input and print all events found.
 * `python days_until.py file1 file2` will print all events in both `file1` and `file2`.
 * `python days_until.py -nd 30` will print all events that are going to happen within 30 days.
