@@ -47,7 +47,7 @@ Here are some examples:
 * `python days_until.py -n -d 7 -D 14` will print all events that are going to happen next week.
 
 ### Installation
-On Unix-like systems, a `Makefile` is provided to "install" this program in your `$PATH`, by default at `/usr/local/bin/`. After installation, you can invoke this program by running `daysuntil` in your shell of choice.
+If you want this program somewhere on your `$PATH`, create a copy of the binary to a suitable location, such as `/usr/local/bin`.
 
 To do so, in the top-level directory of this repo, invoke `make install`. Be sure you sufficient privileges to install the file.
 

@@ -192,7 +192,7 @@ if __name__ == "__main__":
     argparser.add_argument("-c", "--total-only", action="store_true", help=HELP_TOTAL_ONLY)
     argparser.add_argument("-T", "--total-all", action="store_true", dest="total_all", \
             help=HELP_TOTAL_ALL)
-    argparser.add_argument("-C", "--commas", action="store_True", help=HELP_COMMAS)
+    argparser.add_argument("-C", "--commas", action="store_true", help=HELP_COMMAS)
     argparser.add_argument("input-file", nargs='+', help=HELP_ARGUMENTS)
     args = argparser.parse_args()
 
