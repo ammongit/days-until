@@ -5,13 +5,14 @@ This program reads one or more files and lists all events in the file by the num
 
 ### Usage
 ```
-python days_until.py [-h] [-d DELTA] [-D RDELTA] [-r] [-n] [-N] input-file [input-file ...]
+usage: days_until.py [-h] [-d DELTA] [-D RDELTA] [-r] [-n] [-N]
+                     [-t [{none,simple,categories,both}]] [-c] [-T] [-C]
+                     input-file [input-file ...]
 
 List events by days since/until they happen(ed).
 
 positional arguments:
-  input-file            Specify a input file. If none are specified, then
-                        eventlist.txt is used.
+  input-file            Specify input file(s).
 
 optional arguments:
   -h, --help            show this help message and exit
@@ -24,12 +25,13 @@ optional arguments:
   -r, --reverse         Print the events in reverse order.
   -n, --nopast          Don't print any events that have already happened.
   -N, --nofuture        Don't print any events that haven't happened yet.
-  -t, --totals-style [{none,simple,categories,both}]
+  -t [{none,simple,categories,both}], --totals-style [{none,simple,categories,both}]
                         Specify how you want days_until.py to print event
                         totals. (default is 'none')
-  -T, --totals-only     Print only the event totals; do not print any events.
-  -A, --total-all       When displaying totals, print them for all events in all
-                        files, not just the ones that were printed.
+  -c, --total-only      Print only the event totals; do not print any events.
+  -T, --total-all       When displaying totals, print them for all events in
+                        all files, not just the ones that were printed.
+  -C, --commas          Add commas whenever printing numbers.
 ```
 
 The different choices available for `-t` are explained below:
