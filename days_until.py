@@ -26,7 +26,7 @@ HELP_TOTAL_ONLY = "Print only the event totals; do not print any events."
 HELP_TOTAL_ALL = "When displaying totals, print them for all events in all files, not \
 just the ones that were printed."
 HELP_COMMAS = "Add commas whenever printing numbers."
-HELP_ARGUMENTS = "Specify a input file. If none are specified, then eventlist.txt is used."
+HELP_ARGUMENTS = "Specify input file(s)."
 
 def get_events(fns):
     """
